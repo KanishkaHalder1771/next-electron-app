@@ -15,7 +15,19 @@
 			"options": {
 				"outputPath": "dist/apps/next-app",
 				"debug": false
-			}
+			},
+      "configurations": {
+        "dev": {},
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/your-nextjs-app/.env.local",
+              "with": "apps/your-nextjs-app/.env.production"
+            }
+          ]
+        }
+      }
+    
     },
     "serve": {
       "executor": "@nx/next:server",

@@ -2,7 +2,6 @@ import { BrowserWindow, shell, screen } from 'electron';
 import { rendererAppName, rendererAppPort } from './constants';
 import { environment } from '../environments/environment';
 import { join } from 'path';
-import serve from 'electron-serve'
 import { format } from 'url';
 
 export default class App {
@@ -11,7 +10,7 @@ export default class App {
   static mainWindow: Electron.BrowserWindow;
   static application: Electron.App;
   static BrowserWindow;
-  static serve;
+
 
   public static isDevelopmentMode() {
     const isEnvironmentSet: boolean = 'ELECTRON_IS_DEV' in process.env;
@@ -101,7 +100,7 @@ export default class App {
 
   private static loadMainWindow() {
     // load the index.html of the app.
-    if (App.application.isPackaged) {
+    if (false) { // - !App.application.isPackaged
       App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
     } else {
       App.mainWindow.loadURL(
@@ -124,7 +123,6 @@ export default class App {
 
     App.BrowserWindow = browserWindow;
     App.application = app;
-    App.serve = serve({directory: join(__dirname, '..', rendererAppName)}) 
 
     // import('electron-serve').then((serve) => {App.appServe = App.application.isPackaged ? serve.default({
     //   directory: join(__dirname, "../next-app")
