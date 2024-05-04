@@ -9,7 +9,7 @@ export default function Add() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // await axios.post('/api/items', { item });
+      await axios.post('/api/items', { item });
       setItem('');
       alert('Item added successfully!');
     } catch (error) {

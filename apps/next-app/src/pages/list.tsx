@@ -16,17 +16,17 @@ export default function List() {
   }, []);
 
   const fetchItems = async () => {
-    const item: Item = {
-        id: 1,
-        item: "item 1"
-    }
-    setItems([item])
-    // try {
-    //   const response = await axios.get<Item[]>('/api/items');
-    //   setItems(response.data);
-    // } catch (error) {
-    //   console.error('Error fetching items:', error);
+    // const item: Item = {
+    //     id: 1,
+    //     item: "item 1"
     // }
+    // setItems([item])
+    try {
+      const response = await axios.get<Item[]>('/api/items');
+      setItems(response.data);
+    } catch (error) {
+      console.error('Error fetching items:', error);
+    }
   };
 
   return (
