@@ -6,6 +6,42 @@
   "tags": [],
   "// targets": "to see all targets run: nx show project next-app --web",
   "targets": {
-    
+    "build": {
+			"executor": "@nx/next:build",
+			"outputs": [
+				"{options.outputPath}"
+			],
+			"defaultConfiguration": "production",
+			"options": {
+				"outputPath": "dist/apps/next-app",
+				"debug": false
+			}
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "next-app:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "next-app:build:development",
+          "dev": true,
+          "port": 3000,
+          "turbo": false
+        },
+        "production": {
+          "buildTarget": "next-app:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "next-app:build:production"
+      }
+    }
   }
 }
