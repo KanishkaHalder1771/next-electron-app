@@ -70,12 +70,15 @@ export default class App {
       height: height,
       show: false,
       webPreferences: {
+        devTools: true,
         contextIsolation: true,
         backgroundThrottling: false,
         preload: join(__dirname, 'main.preload.js'),
       },
     });
-    App.mainWindow.setMenu(null);
+
+    // App.mainWindow.setMenu(null);
+    App.mainWindow.webContents.openDevTools();
     App.mainWindow.center();
 
     // if main window is ready to show, close the splash window and show the main window

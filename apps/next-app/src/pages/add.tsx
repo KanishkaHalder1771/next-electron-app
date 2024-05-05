@@ -1,12 +1,16 @@
+"use client"
+
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import styles from './Add.module.css';
 
+
+
 export default function Add() {
   const [item, setItem] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       await axios.post('/api/items', { item });
@@ -23,15 +27,15 @@ export default function Add() {
       <Link href="/" className={styles.link}>
         Go to Home Page
       </Link>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.form}>
         <input
           type="text"
           value={item}
           onChange={(e) => setItem(e.target.value)}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>Add</button>
-      </form>
+        <button onClick={handleSubmit} className={styles.button}>Add</button>
+      </div>
     </div>
   );
 }
