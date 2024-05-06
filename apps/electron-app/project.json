@@ -63,6 +63,26 @@
     },
     "lint": {
       "command": "eslint apps/electron-app/**/*.ts"
+    },
+    "serve-with-next": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "development":{
+          "commands": [
+            "nx run next-app:export:development",
+            "npx nx run-many --target=serve --all=true --parallel=2 --configuration=development "
+          ],
+          "parallel": false
+        },
+        "production":{
+          "commands": [
+            "nx run next-app:export:production",
+            "nx run next-app:build:production",
+            "npx nx run-many --target=serve --all=true --parallel=2 --configuration=production"
+          ],
+          "parallel": false
+        }
+      }
     }
   }
 }

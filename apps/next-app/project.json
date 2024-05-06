@@ -56,10 +56,10 @@
       "defaultConfiguration": "development",
       "configurations": {
         "development": {
-          "command": "nx run next-app:build:development"
+          "command": "nx run next-app:build:development --outputPath=dist/apps/next-app-export"
         },
         "production": {
-          "command": "nx run next-app:build:production"
+          "command": "nx run next-app:build:production --outputPath=dist/apps/next-app-export"
         }
       }
       

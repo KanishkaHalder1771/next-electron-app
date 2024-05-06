@@ -2,14 +2,15 @@ Setup:
 
 `npm install`
 
-To run Next app:
+
+To Run Electron-App in development mode:
+(Exports Nextjs App -> Runs Nextjs API Server -> Serves Electronjs App)
 ```
-npx nx run next-app:serve
+npx nx run electron-app:serve-with-next:production
 ```
 
-
-To run Electron app:
+To Run Electron-App in production mode:
+(Exports Nextjs App -> Runs Nextjs API Server -> Serves Electronjs App)
 ```
-npx nx run next-app:build
-npx nx run electron-app:serve
+npx nx run electron-app:serve-with-next:production
 ```
