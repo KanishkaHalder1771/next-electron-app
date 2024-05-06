@@ -13,7 +13,7 @@ export default function Add() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      await axios.post('/api/items', { item });
+      await axios.post(process.env.API_BASE_PATH + '/api/items', { item });
       setItem('');
       alert('Item added successfully!');
     } catch (error) {

@@ -16,13 +16,8 @@ export default function List() {
   }, []);
 
   const fetchItems = async () => {
-    // const item: Item = {
-    //     id: 1,
-    //     item: "item 1"
-    // }
-    // setItems([item])
     try {
-      const response = await axios.get<Item[]>('/api/items');
+      const response = await axios.get<Item[]>(process.env.DATABASE_URL?.toString + '/api/items');
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);

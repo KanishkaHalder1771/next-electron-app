@@ -3,6 +3,9 @@ import { rendererAppName, rendererAppPort } from './constants';
 import { environment } from '../environments/environment';
 import { join } from 'path';
 import { format } from 'url';
+import { createServer } from 'http';
+import next from 'next';
+import { parse } from 'url';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -41,7 +44,7 @@ export default class App {
     }
   }
 
-  private static onReady() {
+  private static async onReady() {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
@@ -101,18 +104,38 @@ export default class App {
     });
   }
 
-  private static loadMainWindow() {
+  private static async loadMainWindow() {
     // load the index.html of the app.
     if (false) { // - !App.application.isPackaged
       App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
     } else {
-      App.mainWindow.loadURL(
-        format({
-          pathname: join(__dirname, '..', rendererAppName, '.next/index.html'),
-          protocol: 'file:',
-          slashes: true,
-        })
-      );
+
+      const nextApp = next({
+        dev: false,
+        dir: join(__dirname, '..', rendererAppName)
+      });
+
+      const requestHandler = nextApp.getRequestHandler();
+
+      // Build the renderer code and watch the files
+      await nextApp.prepare();
+
+      createServer((req: any, res: any) => {
+        const parsedUrl = parse(req.url, true)
+        requestHandler(req, res, parsedUrl)
+      }).listen(3000, () => {
+        console.log('> Ready on http://localhost:3000')
+      })
+
+      App.mainWindow.loadURL('http://localhost:3000/')
+
+      // App.mainWindow.loadURL(
+      //   format({
+      //     pathname: join(__dirname, '..', rendererAppName, '.next/index.html'),
+      //     protocol: 'file:',
+      //     slashes: true,
+      //   })
+      // );
     }
   }
 

@@ -1,7 +1,7 @@
 import { Pool } from 'pg'
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL?.toString(),
+  connectionString: process.env.DATABASE_URL ? process.env.DATABASE_URL.toString() : 'postgresql://user1:pass1@localhost:5431/nextdb',
 });
 
 export async function runQuery<T>(query: string, params: any[] = []): Promise<T[]> {

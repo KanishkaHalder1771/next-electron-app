@@ -40,12 +40,13 @@
         "development": {
           "buildTarget": "next-app:build:development",
           "dev": true,
-          "port": 3000,
+          "port": 3001,
           "turbo": false
-        },
+        },  
         "production": {
           "buildTarget": "next-app:build:production",
-          "dev": false
+          "dev": false,
+          "port": 4200
         }
       }
     },
