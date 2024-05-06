@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Link from 'next/link';
-import styles from './List.module.css';
+"use client"
 
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import axios from 'axios';
+import styles from './List.module.css';
+import { get } from '../lib/apiUtil'
 interface Item {
   id: number;
   item: string;
@@ -17,7 +19,7 @@ export default function List() {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get<Item[]>(process.env.DATABASE_URL?.toString + '/api/items');
+      const response =  await get<Item[]>( 'items');
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);

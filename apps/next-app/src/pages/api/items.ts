@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { runQuery } from '../../lib/apiUtils';
+import { runQuery } from '../../lib/dbUtils';
 import corsMiddleware from '../../lib/corsMiddleware'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -1,6 +1,6 @@
 .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 10 auto;
     padding: 20px;
   }
   
@@ -9,6 +9,11 @@
     margin-bottom: 20px;
   }
   
+.text {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
   .menu {
     list-style-type: none;
     padding: 0;

@@ -106,37 +106,13 @@ export default class App {
 
   private static async loadMainWindow() {
     // load the index.html of the app.
-    if (false) { // - !App.application.isPackaged
-      App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
-    } else {
-
-      const nextApp = next({
-        dev: false,
-        dir: join(__dirname, '..', rendererAppName)
-      });
-
-      const requestHandler = nextApp.getRequestHandler();
-
-      // Build the renderer code and watch the files
-      await nextApp.prepare();
-
-      createServer((req: any, res: any) => {
-        const parsedUrl = parse(req.url, true)
-        requestHandler(req, res, parsedUrl)
-      }).listen(3000, () => {
-        console.log('> Ready on http://localhost:3000')
+    App.mainWindow.loadURL(
+      format({
+        pathname: join(__dirname, "..", rendererAppName, ".next/index.html"),
+        protocol: 'file:',
+        slashes: true,
       })
-
-      App.mainWindow.loadURL('http://localhost:3000/')
-
-      // App.mainWindow.loadURL(
-      //   format({
-      //     pathname: join(__dirname, '..', rendererAppName, '.next/index.html'),
-      //     protocol: 'file:',
-      //     slashes: true,
-      //   })
-      // );
-    }
+    );
   }
 
 
@@ -149,15 +125,6 @@ export default class App {
 
     App.BrowserWindow = browserWindow;
     App.application = app;
-
-    // import('electron-serve').then((serve) => {App.appServe = App.application.isPackaged ? serve.default({
-    //   directory: join(__dirname, "../next-app")
-    // }) : null;} )
-
-    // App.appServe = App.application.isPackaged ? App.serve({
-    //   directory: join(__dirname, "../next-app")
-    // }) : null;
-
     App.application.on('window-all-closed', App.onWindowAllClosed); // Quit when all windows are closed.
     App.application.on('ready', App.onReady); // App is ready to load data
     App.application.on('activate', App.onActivate); // App is activated

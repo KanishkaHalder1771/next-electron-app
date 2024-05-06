@@ -3,7 +3,7 @@ import Cors from 'cors';
 
 const cors = Cors({
   methods: ['GET', 'POST'],
-  origin: 'http://localhost:3000',
+  origin: '*',
 });
 
 function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {

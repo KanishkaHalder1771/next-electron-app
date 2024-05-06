@@ -4,8 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import styles from './Add.module.css';
-
-
+import { post } from '../lib/apiUtil';
 
 export default function Add() {
   const [item, setItem] = useState('');
@@ -13,7 +12,7 @@ export default function Add() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      await axios.post(process.env.API_BASE_PATH + '/api/items', { item });
+      await post('items', {item});
       setItem('');
       alert('Item added successfully!');
     } catch (error) {

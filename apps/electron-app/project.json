@@ -14,14 +14,19 @@
         "assets": ["apps/electron-app/src/assets"]
       },
       "configurations": {
+        "development": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": true
+        },
         "production": {
           "optimization": true,
           "extractLicenses": true,
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/electron-app/src/environments/environment.ts",
-              "with": "apps/electron-app/src/environments/environment.prod.ts"
+              "replace": ".development.env",
+              "with": ".production.env"
             }
           ]
         }
@@ -31,6 +36,10 @@
       "executor": "nx-electron:execute",
       "options": {
         "buildTarget": "electron-app:build"
+      },
+      "configurations": {
+        "development":{},
+        "production":{}
       }
     },
     "package": {
