@@ -1,6 +1,8 @@
 Setup:
 
-`npm install`
+1. `npm install`
+2. Run postgresDB using `dockerfile`. Ports: `development:5431`  `prodcution:5430`
+
 
 
 To Run Electron-App in development mode:

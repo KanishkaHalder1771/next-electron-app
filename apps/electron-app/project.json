@@ -46,7 +46,7 @@
       "executor": "nx-electron:package",
       "options": {
         "name": "electron-app",
-        "frontendProject": "next-app",
+        "frontendProject": "next-app-export",
         "sourcePath": "dist/apps",
         "outputPath": "dist/packages",
         "prepackageOnly": true
@@ -56,7 +56,7 @@
       "executor": "nx-electron:make",
       "options": {
         "name": "electron-app",
-        "frontendProject": "next-app",
+        "frontendProject": "next-app-export",
         "sourcePath": "dist/apps",
         "outputPath": "dist/executables"
       }
@@ -79,6 +79,50 @@
             "nx run next-app:export:production",
             "nx run next-app:build:production",
             "npx nx run-many --target=serve --all=true --parallel=2 --configuration=production"
+          ],
+          "parallel": false
+        }
+      }
+    },
+    "package-with-next": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "development":{
+          "commands": [
+            "nx run next-app:export:development",
+            "nx run electron-app:package",
+            "npx nx run next-app:serve:development"
+          ],
+          "parallel": false
+        },
+        "production":{
+          "commands": [
+            "nx run next-app:export:production",
+            "nx run electron-app:package",
+            "nx run next-app:build:production",
+            "npx nx run next-app:serve:production"
+          ],
+          "parallel": false
+        }
+      }
+    },
+    "make-with-next": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "development":{
+          "commands": [
+            "nx run next-app:export:development",
+            "nx run electron-app:make",
+            "npx nx run next-app:serve:development"
+          ],
+          "parallel": false
+        },
+        "production":{
+          "commands": [
+            "nx run next-app:export:production",
+            "nx run electron-app:make",
+            "nx run next-app:build:production",
+            "npx nx run next-app:serve:production"
           ],
           "parallel": false
         }
