@@ -66,6 +66,7 @@
     },
     "serve-with-next": {
       "executor": "nx:run-commands",
+      "defaultConfiguration": "development",
       "configurations": {
         "development":{
           "commands": [
@@ -86,10 +87,12 @@
     },
     "package-with-next": {
       "executor": "nx:run-commands",
+      "defaultConfiguration": "development",
       "configurations": {
         "development":{
           "commands": [
             "nx run next-app:export:development",
+            "npx nx run electron-app:build:development",
             "nx run electron-app:package",
             "npx nx run next-app:serve:development"
           ],
@@ -98,6 +101,7 @@
         "production":{
           "commands": [
             "nx run next-app:export:production",
+            "npx nx run electron-app:build:production",
             "nx run electron-app:package",
             "nx run next-app:build:production",
             "npx nx run next-app:serve:production"
@@ -108,10 +112,12 @@
     },
     "make-with-next": {
       "executor": "nx:run-commands",
+      "defaultConfiguration": "development",
       "configurations": {
         "development":{
           "commands": [
             "nx run next-app:export:development",
+            "npx nx run electron-app:build:development",
             "nx run electron-app:make",
             "npx nx run next-app:serve:development"
           ],
@@ -120,6 +126,7 @@
         "production":{
           "commands": [
             "nx run next-app:export:production",
+            "npx nx run electron-app:build:production",
             "nx run electron-app:make",
             "nx run next-app:build:production",
             "npx nx run next-app:serve:production"
